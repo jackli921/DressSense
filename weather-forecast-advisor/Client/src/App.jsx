@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
   const [input, setInput] = useState("");
   const [weatherData, setWeatherData] = useState("")
+  const [AiSuggestion, setAiSuggestion] = useState("")
+  const [paragraphs, setParagraph] = useState("")
 
   async function getApiKey() {
     const response = await fetch("http://localhost:3080/api_key");
@@ -24,14 +26,7 @@ function App() {
       console.log(error, "error fetching the api key");
     }
   }
-  // create a function to concatenate human prompt with weather data
-  // function makePrompt(data) {
-  //   const sentence =
-  //     "Could you give me some suggestions for what to wear today given the following weather data in my city, which is also inside the weather data " +
-  //     JSON.stringify(data);
-
-  // }
-  console.log(weatherData)
+  
   async function getAdvice(){
     try{
       const sentence =
@@ -49,7 +44,9 @@ function App() {
       });
 
       const data = await response.json();
-      console.log(data);
+      const suggestion = data.message
+      console.log(suggestion)
+      setAiSuggestion(suggestion);      
     }
     catch(error){
       console.log(error)
@@ -70,7 +67,10 @@ function App() {
         onChange={(e) => setInput(e.target.value)}
       />
       <button onClick={() => getApiKey()}>Get Weather Data</button>
-      {weatherData && <button onClick={() => getAdvice()}>Get Suggestions</button>}
+      {weatherData && (
+        <button onClick={() => getAdvice()}>Get Suggestions</button>
+      )}
+      {AiSuggestion && <pre>{AiSuggestion}</pre> }
     </>
   );
 }

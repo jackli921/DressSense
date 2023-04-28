@@ -7,7 +7,7 @@ import cors from 'cors'
 import { Configuration, OpenAIApi } from "openai";
 
 const configuration = new Configuration({
-  organization: "org-PpiWTFdwhoRSdhS3xaoV71ia",
+  organization: "org-mxOvRl2yB41IF7mVZAz83rFd",
   apiKey: process.env.OPEN_AI_API_KEY,
 });
 
@@ -24,11 +24,9 @@ app.get("/api_key", (req, res) => {
 
 app.post("/", async (req, res) => {
     const {message} = req.body
-
-    console.log(message)
     const response = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
-    messages: [{ role: "user", content: `${message}` }],
+    messages: [{ role: "user", content:message}],
     temperature: 0.5
   });
   
