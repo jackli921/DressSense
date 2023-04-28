@@ -44,7 +44,7 @@ function App() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          message: "say this is a test",
+          message: sentence,
         }),
       });
 
