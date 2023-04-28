@@ -70,7 +70,11 @@ function App() {
       {weatherData && (
         <button onClick={() => getAdvice()}>Get Suggestions</button>
       )}
-      {AiSuggestion && <pre>{AiSuggestion}</pre> }
+      {AiSuggestion && (
+        <pre style="font-size:18px; font-family: Arial, sans-serif;">
+          {AiSuggestion}
+        </pre>
+      )}
     </>
   );
 }
