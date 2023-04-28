@@ -14,17 +14,17 @@ async function getApiKey() {
   getWeatherData(apiKey)
 }
 
-  async function getWeatherData(apiKey) {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${input}&units=metric&APPID=${apiKey}`;
-    try {
-          const response = await fetch(url);
-          const data = await response.json()
-          console.log(data)
-    }
-     catch (error) {
-      console.log(error, "error fetching the api key");
-    }
+async function getWeatherData(apiKey) {
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${input}&units=metric&APPID=${apiKey}`;
+  try {
+        const response = await fetch(url);
+        const data = await response.json()
+        console.log(data)
   }
+    catch (error) {
+    console.log(error, "error fetching the api key");
+  }
+}
 
   return (
     <>
