@@ -1,11 +1,20 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import cityData from './cities.js'
+import SearchResults from "./components/searchResults";
+
+
 
 function App() {
   const [input, setInput] = useState("");
   const [weatherData, setWeatherData] = useState("")
   const [AiSuggestion, setAiSuggestion] = useState("")
   const [paragraphs, setParagraph] = useState("")
+  const [cityDataArr, setCityDataArr] = useState(cityData)
+  const [filteredData, setFilteredData] = useState([])
+  const [isSidebarVisible, setIsSidebarVisible] = useState(true)
+
+  console.log(cityDataArr)
 
   async function getApiKey() {
     const response = await fetch("http://localhost:3080/api_key");
@@ -45,13 +54,30 @@ function App() {
 
       const data = await response.json();
       const suggestion = data.message
-      console.log(suggestion)
       setAiSuggestion(suggestion);      
     }
     catch(error){
       console.log(error)
     }
   }
+
+  function updateSearch() {
+    if (input.length > 0) {
+      const lowercaseUserInput = input.toLowerCase();
+      const filteredDataArr = cityDataArr.filter((place) => {
+        place.lowercaseName = place.name.toLowerCase();
+        return (
+          place.lowercaseName.indexOf(lowercaseUserInput) >= 0
+        );
+      });
+      setFilteredData(filteredDataArr);
+    }
+  }
+
+  useEffect(()=>{
+    updateSearch()
+  },[input])
+
 
   return (
     <>
@@ -66,12 +92,22 @@ function App() {
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
+      
+      <div className="search-result-container" >
+        {isSidebarVisible &&       
+        <SearchResults 
+          setIsSidebarVisible ={setIsSidebarVisible}
+          filteredData = {filteredData}
+          setInput = {setInput}
+        /> }
+       </div>
+
       <button onClick={() => getApiKey()}>Get Weather Data</button>
       {weatherData && (
         <button onClick={() => getAdvice()}>Get Suggestions</button>
       )}
       {AiSuggestion && (
-        <pre style="font-size:18px; font-family: Arial, sans-serif;">
+        <pre>
           {AiSuggestion}
         </pre>
       )}
