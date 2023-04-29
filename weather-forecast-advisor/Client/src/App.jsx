@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 
 function App() {
   const [input, setInput] = useState("");
@@ -30,7 +29,7 @@ function App() {
   async function getAdvice(){
     try{
       const sentence =
-        "Could you give me some suggestions for what to wear today given the following weather data in my city, which is also inside the weather data " +
+        "Could you give me a short suggestion summary and suggestions in bullet points for what to wear today given the following weather data" +
         JSON.stringify(weatherData);
 
       const response = await fetch("http://localhost:3080", {
@@ -54,7 +53,7 @@ function App() {
   }
 
   return (
-    <>
+    <main>
       <h1>☀️Are you dressed for the weather? ☔️ </h1>
       <p>
         Tell me your location, and AI will give you suggestions for what to
@@ -71,11 +70,11 @@ function App() {
         <button onClick={() => getAdvice()}>Get Suggestions</button>
       )}
       {AiSuggestion && (
-        <pre style="font-size:18px; font-family: Arial, sans-serif;">
+        <pre>
           {AiSuggestion}
         </pre>
       )}
-    </>
+    </main>
   );
 }
 
