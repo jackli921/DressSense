@@ -12,7 +12,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-
 }
 
 a {
@@ -26,14 +25,10 @@ a:hover {
 
 body {
   margin: 0;
-  width: 100%;
+  display: flex;
+  place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content:center;
-  align-items: center;
-  text-align: center;
 }
 
 h1 {
@@ -48,7 +43,6 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -60,30 +54,26 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+input{
+  font-size: 2em;
+  text-align: center;
 }
 
-main{
-  width: 100%;
-  padding: 2em;
-  min-width: 400px;
+.search-result-container{
+  height: 400px;
+  overflow: auto;
+  margin: 2em 0;
+  color: white;
 }
 
-pre{
-  text-align: left;
-  font-size: 18px;
-  white-space: pre-wrap;
-  max-width: 800px;
-  margin: 2em;
-  padding: 1em;
+.result-card{
+  height: 20px;
+  margin: 1em;
+  cursor: pointer;
+}
+
+.result-text {
+
+  padding: 1rem;
+  font-size: 1rem;
 }
