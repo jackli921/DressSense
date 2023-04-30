@@ -72,8 +72,19 @@ input{
   cursor: pointer;
 }
 
-.result-text {
+.search-result-container{
+  height: 400px;
+  overflow: auto;
+}
 
+.result-card{
+  height: 20px;
+  margin: 1em;
+  cursor: pointer;
+}
+
+.result-text {
+  color: white;
   padding: 1rem;
   font-size: 1rem;
 }

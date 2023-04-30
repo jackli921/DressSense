@@ -14,7 +14,7 @@ function App() {
   const [filteredData, setFilteredData] = useState([])
   const [isSidebarVisible, setIsSidebarVisible] = useState(true)
 
-
+  console.log(cityDataArr)
 
   async function getApiKey() {
     const response = await fetch("http://localhost:3080/api_key");
@@ -60,25 +60,6 @@ function App() {
       console.log(error)
     }
   }
-
-  function updateSearch() {
-    if (input.length > 0) {
-      const lowercaseUserInput = input.toLowerCase();
-      const filteredDataArr = cityDataArr.filter((place) => {
-        place.lowercaseName = place.name.toLowerCase();
-        return (
-          place.lowercaseName.indexOf(lowercaseUserInput) >= 0
-        );
-      });
-      setFilteredData(filteredDataArr);
-    }
-  }
-
-  useEffect(()=>{
-    updateSearch()
-    setIsSidebarVisible(true)
-  },[input])
-
 
   return (
     <>
