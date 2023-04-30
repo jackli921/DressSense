@@ -61,24 +61,6 @@ function App() {
     }
   }
 
-  function updateSearch() {
-    if (input.length > 0) {
-      const lowercaseUserInput = input.toLowerCase();
-      const filteredDataArr = cityDataArr.filter((place) => {
-        place.lowercaseName = place.name.toLowerCase();
-        return (
-          place.lowercaseName.indexOf(lowercaseUserInput) >= 0
-        );
-      });
-      setFilteredData(filteredDataArr);
-    }
-  }
-
-  useEffect(()=>{
-    updateSearch()
-  },[input])
-
-
   return (
     <>
       <h1>☀️Are you dressed for the weather? ☔️ </h1>
