@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 
 export default function SearchResult(props){
-    const {filteredData, setInput, input, setIsSidebarVisible, setIsSearchBtnVisible} = props
+    const {filteredData, setInput} = props
         
     function handleClick(e) {
         setInput(e.target.innerText)

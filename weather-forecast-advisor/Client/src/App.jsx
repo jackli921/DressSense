@@ -12,7 +12,7 @@ function App() {
   const [paragraphs, setParagraph] = useState("")
   const [cityDataArr, setCityDataArr] = useState(cityData)
   const [filteredData, setFilteredData] = useState([])
-  const [isSidebarVisible, setIsSidebarVisible] = useState(true)
+  const [isCityList, setIsCityList] = useState(true)
   const [isSearchBtnVisible, setIsSearchBtnVisible] = useState(false)
 
 
@@ -74,18 +74,18 @@ function App() {
       setFilteredData(filteredDataArr);
     }
     if (input === "") {
-      setIsSidebarVisible(true);
+      setIsCityList(true);
       setFilteredData(cityData);
     }
   }, [input])
   
   useEffect(()=>{
     if(filteredData.length === 1 && filteredData[0].name === input){
-      setIsSidebarVisible(false);
+      setIsCityList(false);
       setIsSearchBtnVisible(true)
     }
     else{
-      setIsSidebarVisible(true);
+      setIsCityList(true);
       setIsSearchBtnVisible(false);
     }
 
@@ -117,13 +117,10 @@ function App() {
       </div>
 
       <div className="search-result-container">
-        {isSidebarVisible && (
+        {isCityList && (
           <SearchResults
-            setIsSidebarVisible={setIsSidebarVisible}
-            setIsSearchBtnVisible={setIsSearchBtnVisible}
             filteredData={filteredData}
             setInput={setInput}
-            input={input}
           />
         )}
 
