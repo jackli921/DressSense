@@ -14,6 +14,10 @@ function App() {
   const [filteredData, setFilteredData] = useState([])
   const [isCityList, setIsCityList] = useState(true)
   const [isSearchBtnVisible, setIsSearchBtnVisible] = useState(false)
+  const [isLoadingData, setIsLoadingData] = useState(false)
+  const [suggestionContent, setSuggestionContent] = useState(
+    <h2>Ready when you are!</h2>
+  );
 
 
   async function getApiKey() {
@@ -24,25 +28,36 @@ function App() {
     getWeatherData(apiKey);
   }
 
+
   async function getWeatherData(apiKey) {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${input}&units=metric&APPID=${apiKey}`;
+
+    setIsLoadingData(true)
+    const city = filteredData[0]
+    const lon = city.lon
+    const lat = city.lat
+  
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
     try {
       const response = await fetch(url);
       const data = await response.json();
       setWeatherData(data);
+    
       
     } catch (error) {
       console.log(error, "error fetching the api key");
     }
   }
-  
-  async function getAdvice(){
-    try{
+
+
+  useEffect(()=>{
+    if(weatherData && filteredData[0] && input === filteredData[0].name){
+
+
       const sentence =
-        "Could you give me some suggestions for what to wear today given the following weather data in my city, which is also inside the weather data " +
+        "Could you give me some suggestions for what to wear today given the following weather data in my city. In your response give a two to three summary, actionable suggestions in bulletpoints,  and convert any kelvin measurements into celsius " +
         JSON.stringify(weatherData);
 
-      const response = await fetch("http://localhost:3080", {
+      fetch("http://localhost:3080", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,18 +65,22 @@ function App() {
         body: JSON.stringify({
           message: sentence,
         }),
-      });
-
-      const data = await response.json();
-      const suggestion = data.message
-      setAiSuggestion(suggestion);      
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          const suggestion = data.message;
+          setAiSuggestion(suggestion);
+          setIsLoadingData(false);
+        })
+        .catch((error) => {
+          setIsLoadingData(false);
+          console.log(error);
+        });
     }
-    catch(error){
-      console.log(error)
-    }
-  }
+  
+  },[weatherData])
 
-
+  // controlling visibility of buttons and city list
 
   useEffect(()=>{
     if (input.length > 0) {
@@ -92,6 +111,16 @@ function App() {
   },[filteredData])
 
 
+  useEffect(()=>{
+    
+    if(!AiSuggestion && isLoadingData){
+      setSuggestionContent(<h2>Getting it suggestion ... </h2>)
+    }
+    else if(AiSuggestion && !isLoadingData){
+      setSuggestionContent(<pre>{AiSuggestion}</pre>);
+    }
+
+  },[isLoadingData, AiSuggestion])
 
   return (
     <>
@@ -101,32 +130,29 @@ function App() {
         dress for the day{" "}
       </p>
 
-
-      <input
-        type="search"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-
-      <div className="inline">
-        {isSearchBtnVisible && (
-          <button onClick={() => getApiKey()}>Get Weather Data</button>)}
-        {weatherData && (
-          <button onClick={() => getAdvice()}>Get Suggestions</button>
-        )}
-      </div>
-
-      <div className="search-result-container">
-        {isCityList && (
-          <SearchResults
-            filteredData={filteredData}
-            setInput={setInput}
+      <main className="main">
+        <section className="input-container">
+          <input
+            type="search"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
           />
-        )}
 
-      </div>
+          <div className="inline">
+            {isSearchBtnVisible && (
+              <button onClick={() => getApiKey()}>Get Suggestion</button>
+            )}
+          </div>
+        </section>
+        
+        <div className="search-result-container">
+          {isCityList && (
+            <SearchResults filteredData={filteredData} setInput={setInput} />
+          )}
+        </div>
 
-      {AiSuggestion && <pre>{AiSuggestion}</pre>}
+        <div className="ai-response-container">{suggestionContent}</div>
+      </main>
     </>
   );
 }
