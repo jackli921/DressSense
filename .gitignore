@@ -1,8 +1,5 @@
-**\.env
-
-
 # Ignore node_modules directories
-**/node_modules/
+**/node_modules
 
 # Ignore environment files
-.env*
+**/.env*
