@@ -9,7 +9,7 @@ function App() {
   const [input, setInput] = useState("");
   const [weatherData, setWeatherData] = useState("")
   const [AiSuggestion, setAiSuggestion] = useState("")
-  const [paragraphs, setParagraph] = useState("")
+
   const [cityDataArr, setCityDataArr] = useState(cityData)
   const [filteredData, setFilteredData] = useState([])
   const [isCityList, setIsCityList] = useState(true)
@@ -30,7 +30,6 @@ function App() {
 
 
   async function getWeatherData(apiKey) {
-
     setIsLoadingData(true)
     const city = filteredData[0]
     const lon = city.lon
@@ -49,9 +48,9 @@ function App() {
   }
 
 
+  // make fetch call to open API when weatherdata exists
   useEffect(()=>{
     if(weatherData && filteredData[0] && input === filteredData[0].name){
-
 
       const sentence =
         "Could you give me some suggestions for what to wear today given the following weather data in my city. In your response give a two to three summary, actionable suggestions in bulletpoints,  and convert any kelvin measurements into celsius " +
@@ -80,7 +79,7 @@ function App() {
   
   },[weatherData])
 
-  // controlling visibility of buttons and city list
+  // verifying if input exists and populating city list if no input is detected
 
   useEffect(()=>{
     if (input.length > 0) {
@@ -97,6 +96,8 @@ function App() {
       setFilteredData(cityData);
     }
   }, [input])
+
+  // disable visibility of city list and search button based on state of input 
   
   useEffect(()=>{
     if(filteredData.length === 1 && filteredData[0].name === input){
@@ -111,6 +112,7 @@ function App() {
   },[filteredData])
 
 
+  // conditionally render text based on loading status
   useEffect(()=>{
     
     if(!AiSuggestion && isLoadingData){
@@ -144,7 +146,7 @@ function App() {
             )}
           </div>
         </section>
-        
+
         <div className="search-result-container">
           {isCityList && (
             <SearchResults filteredData={filteredData} setInput={setInput} />
