@@ -13,7 +13,7 @@ function App() {
   const [cityDataArr, setCityDataArr] = useState(cityData)
   const [filteredData, setFilteredData] = useState([])
   const [isSidebarVisible, setIsSidebarVisible] = useState(true)
-
+  const [isSearchBtnVisible, setIsSearchBtnVisible] = useState(false)
 
 
   async function getApiKey() {
@@ -61,23 +61,36 @@ function App() {
     }
   }
 
-  function updateSearch() {
+
+
+  useEffect(()=>{
     if (input.length > 0) {
       const lowercaseUserInput = input.toLowerCase();
       const filteredDataArr = cityDataArr.filter((place) => {
         place.lowercaseName = place.name.toLowerCase();
-        return (
-          place.lowercaseName.indexOf(lowercaseUserInput) >= 0
-        );
+        return place.lowercaseName.indexOf(lowercaseUserInput) >= 0;
       });
+
       setFilteredData(filteredDataArr);
     }
-  }
-
+    if (input === "") {
+      setIsSidebarVisible(true);
+      setFilteredData(cityData);
+    }
+  }, [input])
+  
   useEffect(()=>{
-    updateSearch()
-    setIsSidebarVisible(true)
-  },[input])
+    if(filteredData.length === 1 && filteredData[0].name === input){
+      setIsSidebarVisible(false);
+      setIsSearchBtnVisible(true)
+    }
+    else{
+      setIsSidebarVisible(true);
+      setIsSearchBtnVisible(false);
+    }
+
+  },[filteredData])
+
 
 
   return (
@@ -88,30 +101,35 @@ function App() {
         dress for the day{" "}
       </p>
 
+
       <input
-        type="text"
+        type="search"
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
-      
-      <div className="search-result-container" >
-        {isSidebarVisible &&       
-        <SearchResults 
-          setIsSidebarVisible ={setIsSidebarVisible}
-          filteredData = {filteredData}
-          setInput = {setInput}
-        /> }
-       </div>
 
-      <button onClick={() => getApiKey()}>Get Weather Data</button>
-      {weatherData && (
-        <button onClick={() => getAdvice()}>Get Suggestions</button>
-      )}
-      {AiSuggestion && (
-        <pre>
-          {AiSuggestion}
-        </pre>
-      )}
+      <div className="inline">
+        {isSearchBtnVisible && (
+          <button onClick={() => getApiKey()}>Get Weather Data</button>)}
+        {weatherData && (
+          <button onClick={() => getAdvice()}>Get Suggestions</button>
+        )}
+      </div>
+
+      <div className="search-result-container">
+        {isSidebarVisible && (
+          <SearchResults
+            setIsSidebarVisible={setIsSidebarVisible}
+            setIsSearchBtnVisible={setIsSearchBtnVisible}
+            filteredData={filteredData}
+            setInput={setInput}
+            input={input}
+          />
+        )}
+
+      </div>
+
+      {AiSuggestion && <pre>{AiSuggestion}</pre>}
     </>
   );
 }
