@@ -1,16 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 
 export default function SearchResult(props){
-    const {filteredData, setInput, setIsSidebarVisible} = props
+    const {filteredData, setInput} = props
         
     function handleClick(e) {
-        const target = e.target
-        if (target && typeof target.innerText === 'string') {
-            setInput(target.innerText);
-        }
-        setIsSidebarVisible(false)
+        setInput(e.target.innerText)
     }
+
 
     const results = filteredData.map((place, index) => {
         return (
