@@ -53,7 +53,7 @@ function App() {
     if(weatherData && filteredData[0] && input === filteredData[0].name){
 
       const sentence =
-        "Could you give me some suggestions for what to wear today given the following weather data in my city. In your response give a two to three summary, actionable suggestions in bulletpoints,  and convert any kelvin measurements into celsius " +
+        "Could you give me some suggestions for what to wear today given the following weather data in my city. In your response give a two to three setence summary, actionable suggestions in bulletpoints, and convert any kelvin measurements into celsius " +
         JSON.stringify(weatherData);
 
       fetch("http://localhost:3080", {
@@ -116,7 +116,7 @@ function App() {
   useEffect(()=>{
     
     if(!AiSuggestion && isLoadingData){
-      setSuggestionContent(<h2>Getting it suggestion ... </h2>)
+      setSuggestionContent(<h2>Getting your suggestion ... </h2>)
     }
     else if(AiSuggestion && !isLoadingData){
       setSuggestionContent(<pre>{AiSuggestion}</pre>);
