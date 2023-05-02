@@ -21,7 +21,7 @@ function App() {
 
 
   async function getApiKey() {
-    const response = await fetch("http://localhost:3080/api_key");
+    const response = await fetch("http://localhost:5000/api_key");
     const data = await response.json();
     const apiKey = data.apiKey;
     // use apiKey in your weather API request
