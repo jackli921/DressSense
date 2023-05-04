@@ -21,7 +21,7 @@ function App() {
 
 
   async function getApiKey() {
-    const response = await fetch("http://localhost:5000/api_key");
+    const response = await fetch("http://localhost:5050/api_key");
     const data = await response.json();
     const apiKey = data.apiKey;
     // use apiKey in your weather API request
@@ -56,7 +56,7 @@ function App() {
         "Could you give me some suggestions for what to wear today given the following weather data in my city. In your response give a two to three setence summary, actionable suggestions in bulletpoints, and convert any kelvin measurements into celsius " +
         JSON.stringify(weatherData);
 
-      fetch("http://localhost:3080", {
+      fetch("http://localhost:5050", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

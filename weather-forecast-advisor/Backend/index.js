@@ -36,6 +36,6 @@ app.post("/", async (req, res) => {
 
 });
 
-app.listen(5050, () => {
-  console.log("listening on port 5050");
+app.listen(process.env.PORT, () => {
+  console.log("listening on port", process.env.PORT);
 });
