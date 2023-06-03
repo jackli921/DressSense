@@ -4,7 +4,6 @@ import cityData from './cities.js'
 import SearchResults from "./components/searchResults";
 
 
-
 function App() {
   const [input, setInput] = useState("");
   const [weatherData, setWeatherData] = useState("")
@@ -53,7 +52,7 @@ function App() {
     if(weatherData && filteredData[0] && input === filteredData[0].name){
 
       const sentence =
-        "Could you give me some suggestions for what to wear today given the following weather data in my city. In your response give a two to three setence summary, actionable suggestions in bulletpoints, and convert any kelvin measurements into celsius " +
+        "Could you give me some suggestions for what to wear today given the following weather data in my city. In your response give a summary, actionable suggestions in bullet points, and convert all temperatures to celsius " +
         JSON.stringify(weatherData);
 
       fetch("http://localhost:5050", {
