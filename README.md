@@ -2,7 +2,7 @@
  <img src="/Frontend/img/logo.png" width="300px">
 </div>
 
-## AI Weather-Clothing Advisory
+## DressSense
 Input your current location, and get your suggestion for what to dress! 
 
 ## Overview
