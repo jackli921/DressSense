@@ -52,7 +52,7 @@ function App() {
     if(weatherData && filteredData[0] && input === filteredData[0].name){
 
       const sentence =
-        "Give suggestions for what to wear today given the following weather data in my city. In your response give a summary, convert all temperature that are in kelvins and display them in celsius temperature, and give suggestions in bullet points." +
+        "Give suggestions for what to wear today given the following weather data in my city. The temperature data given are in kelvins,so in your response please convert any temperature you use into celsius. Give a summary and 3-5 suggestions in bullet points." +
         JSON.stringify(weatherData);
 
       fetch("https://ai-weather-dressing-advisor.onrender.com", {
