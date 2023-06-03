@@ -2,10 +2,10 @@
 Input your current location, and get your suggestion for what to dress! 
 
 ## Overview
-This project was born out of my first week-long pair programming sessions organized by Chingus. The idea was to utilize current weather data with LLM such as ChatGPT to produce advice on what to dress given the current weather data. The challenges lied in successfully and smoothly connecting all the pieces in the front and backend, especially regarding:
-- Making fetch call to get the open weather API key from the backend.
-- Making fetch call to open weather to get the weather data.
-- Making fetch call to OpenAI model with weather data for a response.
+This project was born out of my first week-long pair programming session organized by Chingus. The purpose was to utilize current weather data in combination with LLMs such as ChatGPT to get advice on what to dress given the current weather. The challenges lied in connecting all logic for passing data between front and backend, especially:
+- Making call to get the open weather API key from the backend.
+- Making call to open weather to get the weather data.
+- Making call to OpenAI model with weather data for a response.
 
 ## Features
 1. One search box for user input with automatic input validation.
