@@ -58,10 +58,10 @@ input{
 }
 
 .search-result-container{
-  height: 400px;
+  height: 250px;
   overflow: auto;
   color: white;
-  max-height: 30vh;
+  max-height: 20vh;
 }
 
 .result-card{
