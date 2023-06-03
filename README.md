@@ -1,3 +1,7 @@
+<div align="center">
+ <img src="/Frontend/img/logo.png" width="300px">
+</div>
+
 ## AI Weather-Clothing Advisory
 Input your current location, and get your suggestion for what to dress! 
 
@@ -34,3 +38,10 @@ To run this project locally:
 ## Improvements
 - Convert to TypeScript
 - Improve responsiveness on mobile devices
+
+
+## Demo
+<div align="center">
+ <img src="/Frontend/img/demo.png" height="600px">
+</div>
+ 
