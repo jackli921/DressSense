@@ -13,10 +13,13 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration)
 
+const corsOption = {
+  origin: "https://openai-weather-dress-advisor.onrender.com",
+};
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cors())
+app.use(cors(corsOption))
 
 app.get("/api_key", (req, res) => {
   res.json({ apiKey: process.env.OPEN_WEATHER_API_KEY});

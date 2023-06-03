@@ -20,7 +20,7 @@ function App() {
 
 
   async function getApiKey() {
-    const response = await fetch("http://localhost:5050/api_key");
+    const response = await fetch("https://ai-weather-dressing-advisor.onrender.com//api_key");
     const data = await response.json();
     const apiKey = data.apiKey;
     // use apiKey in your weather API request
