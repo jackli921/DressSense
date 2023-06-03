@@ -16,21 +16,21 @@ This project was born out of my first week-long pair programming session organiz
 To run this project locally:
 
 1. Clone this project locally.
-2. Open the root directory, add a .env file.
-3. Add your own OpenAI and OpenWeather API Keys and save.
-4. Open your terminal and navigate into the root directory.
-5. Run npm install to install dependencies for the backend.
-6. Run node index.js to start the backend server.
-7. Open another terminal, navigate into the Client folder.
-8. Run npm install to install dependencies for the frontend.
-9. Run npm run dev to build the frontend project.
+2. ```cd``` to Backend folder and add a .env file.
+3. Inside .env file, add your own OpenAI API Key, OpenWeather API Keys, and your desired port number.
+4. In the Backend folder, open ```index.js``` and remove corsOption from ```app.use(cors())``` and save.
+6. Run ```npm install``` to install dependencies for the backend and run ```node index.js``` to start the backend server.
+8. Open another terminal, navigate into the Frontend folder.
+9. Open ```app.js``` and replace all fetch call urls with a localhost port number you have specified for the backend.  
+10. Run npm install to install dependencies and run ```npm run dev``` to build the frontend project.
 
-## Dependencies
-- ReactJS
 
 ## Technologies
-- ReactJS, CSS3
+- ReactJS
+- Node
+- Express
+- CSS3
 
 ## Improvements
-- Convert to TypeScript.
-- Improve responsiveness on mobile devices.
+- Convert to TypeScript
+- Improve responsiveness on mobile devices
