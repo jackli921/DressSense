@@ -1,5 +1,5 @@
 <div align="center">
- <img src="/Frontend/img/logo.png" width="300px">
+ <img src="/Frontend/img/logo.png" width="400px">
 </div>
 
 ## DressSense
