@@ -3,18 +3,15 @@
 </div>
 
 ## DressSense
-Input your current location, and get your suggestion for what to dress! 
+An intelligent app powered by the OpenAI API that provides personalized dressing advice based on real-time data for users' current city locations 
 
 ## Overview
-This project was born out of my first week-long pair programming session organized by Chingus. The purpose was to utilize current weather data in combination with LLMs such as ChatGPT to get advice on what to dress given the current weather. The challenges lied in connecting all logic for passing data between front and backend, especially:
-- Making call to get the open weather API key from the backend.
-- Making call to open weather to get the weather data.
-- Making call to OpenAI model with weather data for a response.
+This project was born out of my first week-long pair-programming session organized by Chingus. The purpose of the app is to help people make better dressing choices given the weather of the day. The app fetches current weather data in combination and sends a pre-written prompt to the openai API for get advice on what to dress given the current weather. 
 
 ## Features
-1. One search box for user input with automatic input validation.
-2. City list of 300+ choices of cities to choose or scroll from.
-3. A 2-3 sentence summary suggestion and suggestions in bullet points.
+1. A text input search field for city names with auto-complete and input validation.
+2. 300+ choices of cities to choose or scroll from.
+3. Text summary and actionable advice for what to dress given the day's weather.
 
 ## Installation
 To run this project locally:
@@ -30,10 +27,7 @@ To run this project locally:
 
 
 ## Technologies
-- ReactJS
-- Node
-- Express
-- CSS3
+ReactJS, Node.js, Express.js, CSS3
 
 ## Improvements
 - Convert to TypeScript
